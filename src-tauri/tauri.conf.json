@@ -14,7 +14,12 @@
       {
         "title": "catchast",
         "width": 800,
-        "height": 600
+        "height": 600, 
+        "decorations": false,
+        "resizable": true,
+        "closable": true,
+        "maximizable": true,
+        "minimizable": true
       }
     ],
     "security": {
