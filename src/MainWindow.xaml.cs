@@ -180,7 +180,7 @@ public partial class MainWindow : Window
 
             try
             {
-                await MessageEnterAsync(MessageBox.Text);
+                _ = MessageEnterAsync(MessageBox.Text);
             }
             finally
             {

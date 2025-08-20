@@ -50,7 +50,7 @@ public partial class App : System.Windows.Application
                 services.AddTransient<SettingsWindow>();
 
                 // メッセージングの登録
-                services.AddSingleton<IAsyncEventBus, AsyncEventBus>();
+                services.AddSingleton<IAsyncEventBus, QueuedAsyncEventBus>();
 
                 // サービスの登録
                 // NOTE: サービスはアプリケーション内で使い回すことが想定されるため、Singletonとして登録
