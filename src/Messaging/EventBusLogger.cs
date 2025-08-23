@@ -39,13 +39,12 @@ public class EventBusLogger : ILogger
         }
 
         var message = formatter(state, exception);
-        var logEntry = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] [{logLevel}] {message}";
 
         if (exception != null)
         {
-            logEntry += Environment.NewLine + exception.ToString();
+            message += Environment.NewLine + exception.ToString();
         }
 
-        _asyncEventBus.PublishAsync(new LogMessage(logEntry, logLevel)).Wait();
+        _asyncEventBus.PublishAsync(new LogMessage(message, logLevel));
     }
 }

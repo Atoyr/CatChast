@@ -116,8 +116,9 @@ public class AsyncEventBus : IAsyncEventBus
         }
     }
 
-    public void Clear()
+    public Task StopAsync()
     {
         _handlers.Clear();
+        return Task.CompletedTask;
     }
 }

@@ -35,5 +35,5 @@ public interface IAsyncEventBus
     /// <summary>
     /// Removes all subscribed handlers.
     /// </summary>
-    void Clear();
+    Task StopAsync();
 }

@@ -103,11 +103,11 @@ public class SpeakerService : ISpeakerService
         var speaker = SpeakerFactory.Create<T>(options);
         _clients.Add(name, speaker);
 
-        var subscription = _asyncEventBus.SubscribeAsync<ClientMessage>(async e =>
+        var subscription = _asyncEventBus.Subscribe<ClientMessage>(e =>
         {
             if (e.Key == name)
             {
-                await speaker.SpeakMessageAsync(e.Content);
+                _ = speaker.SpeakMessageAsync(e.Content);
             }
         });
         _subscriptions.Add(name, subscription);
@@ -117,7 +117,7 @@ public class SpeakerService : ISpeakerService
             _logger.LogInformation($"{name} client started successfully.");
             await Task.CompletedTask;
         };
-        speaker.RunAsync();
+        Task.Run(() => speaker.RunAsync());
         return speaker;
     }
 
@@ -132,11 +132,11 @@ public class SpeakerService : ISpeakerService
         }
         _clients.Add(name, client);
 
-        var subscription = _asyncEventBus.SubscribeAsync<ClientMessage>(async e =>
+        var subscription = _asyncEventBus.Subscribe<ClientMessage>( e =>
         {
             if (e.Key == name)
             {
-                await client!.SpeakMessageAsync(e.Content);
+                client!.SpeakMessageAsync(e.Content);
             }
         });
         _subscriptions.Add(name, subscription);
