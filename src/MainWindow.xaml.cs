@@ -17,6 +17,8 @@ using System.Net.WebSockets;
 using System.Drawing.Imaging;
 using Microsoft.Extensions.Logging;
 
+using Medoz.CatChast.Messaging;
+
 namespace Medoz.KoeKan;
 
 /// <summary>
@@ -86,6 +88,27 @@ public partial class MainWindow : Window
                     message.Username,
                     message.Content,
                     message.Timestamp.Date);
+                _listener.AddMessage(chatMessage);
+            }
+            catch (Exception ex)
+            {
+                // メッセージの変換に失敗した場合はログに出力
+                mwvm.Logger.LogError(ex, "Failed to convert message type.");
+            }
+        });
+
+        // メッセージの受信を購読
+        mwvm.AsyncEventBus.Subscribe<LogMessage>((message) =>
+        {
+            try
+            {
+                var chatMessage = new ChatMessage(
+                    ChatMessageType.LogInfo,
+                    "",
+                    null,
+                    "",
+                    message.Content,
+                    DateTime.Now);
                 _listener.AddMessage(chatMessage);
             }
             catch (Exception ex)
@@ -204,15 +227,15 @@ public partial class MainWindow : Window
             && text.Length > 0
             && DataContext is MainWindowViewModel mwvm)
         {
+            MessageBox.Text = string.Empty;
             if (text[0] == ':')
             {
                 await mwvm.ExecuteCommand(text.Substring(1));
             }
             else
             {
-                await mwvm.SendMessage(text);
+                await Task.Run(async () => await mwvm.SendMessage(text));
             }
-            MessageBox.Text = string.Empty;
         }
     }
 
