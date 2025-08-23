@@ -234,7 +234,7 @@ public partial class MainWindow : Window
             }
             else
             {
-                await Task.Run(async () => await mwvm.SendMessage(text));
+                await mwvm.SendMessage(text);
             }
         }
     }
