@@ -45,6 +45,6 @@ public class EventBusLogger : ILogger
             message += Environment.NewLine + exception.ToString();
         }
 
-        _asyncEventBus.PublishAsync(new LogMessage(message, logLevel)).Wait();
+        _asyncEventBus.PublishAsync(new LogMessage(message, logLevel));
     }
 }
