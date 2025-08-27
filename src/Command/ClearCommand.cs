@@ -1,5 +1,5 @@
-using Medoz.KoeKan.Services;
-namespace Medoz.KoeKan.Command;
+using Medoz.CatChast.Services;
+namespace Medoz.CatChast.Command;
 
 public class ClearCommand : ICommand
 {

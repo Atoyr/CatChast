@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace Medoz.KoeKan;
+namespace Medoz.CatChast;
 
 public class ProxyLogger : ILogger
 {
@@ -32,7 +32,7 @@ public class ProxyLogger : ILogger
 
         // ログメッセージのフォーマット
         string message = formatter(state, exception);
-        
+
         WriteLog(logLevel, eventId, message);
     }
 }

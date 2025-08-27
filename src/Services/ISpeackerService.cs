@@ -1,6 +1,6 @@
-using Medoz.KoeKan.Speakers;
+using Medoz.CatChast.Speakers;
 
-namespace Medoz.KoeKan.Services;
+namespace Medoz.CatChast.Services;
 
 public interface ISpeakerService
 {

@@ -1,7 +1,7 @@
 using System.Text;
 using System.Security.Cryptography;
 
-namespace Medoz.KoeKan.Services;
+namespace Medoz.CatChast.Services;
 
 /// <summary>
 /// シークレット情報を保持するクラス

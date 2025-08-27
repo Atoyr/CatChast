@@ -1,11 +1,11 @@
-using Medoz.KoeKan.Services;
-using Medoz.KoeKan.Clients;
-using Medoz.KoeKan.Data;
+using Medoz.CatChast.Services;
+using Medoz.CatChast.Clients;
+using Medoz.CatChast.Data;
 using Medoz.CatChast.Auth;
 using Medoz.CatChast.Messaging;
 using Microsoft.Extensions.Logging;
 
-namespace Medoz.KoeKan.Command;
+namespace Medoz.CatChast.Command;
 
 public class TwitchCommand_Start : ICommand
 {

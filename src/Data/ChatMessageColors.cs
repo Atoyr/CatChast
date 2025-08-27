@@ -1,7 +1,7 @@
 
 using System.Drawing;
 
-namespace Medoz.KoeKan.Data;
+namespace Medoz.CatChast.Data;
 
 /// <summary>
 /// </summary>

@@ -1,8 +1,8 @@
-<UserControl x:Class="Medoz.KoeKan.GeneralSettingsView"
+<UserControl x:Class="Medoz.CatChast.GeneralSettingsView"
              x:Name="root"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:components="clr-namespace:Medoz.KoeKan.Components" >
+             xmlns:components="clr-namespace:Medoz.CatChast.Components" >
     <Grid Height="Auto" Width="Auto">
         <StackPanel Margin="8,0,8,0">
             <TextBlock Text="設定" FontSize="24" Margin="0,16,0,0"/>

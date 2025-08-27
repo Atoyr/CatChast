@@ -1,9 +1,9 @@
-using Medoz.KoeKan.Speakers;
-using Medoz.KoeKan.Data;
-using Medoz.KoeKan.Services;
+using Medoz.CatChast.Speakers;
+using Medoz.CatChast.Data;
+using Medoz.CatChast.Services;
 
 using Microsoft.Extensions.Logging;
-namespace Medoz.KoeKan.Command;
+namespace Medoz.CatChast.Command;
 
 public class VoicevoxCommand_Start : ICommand
 {

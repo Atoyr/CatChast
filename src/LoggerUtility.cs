@@ -4,11 +4,11 @@ using Microsoft.Extensions.Logging;
 
 using Medoz.Logging;
 
-namespace Medoz.KoeKan;
+namespace Medoz.CatChast;
 
 /// <summary>
 /// </summary>
-public class LoggerUtility 
+public class LoggerUtility
 {
     private static ILoggerFactory? _loggerFactory;
 

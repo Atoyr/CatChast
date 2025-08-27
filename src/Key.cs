@@ -1,4 +1,4 @@
-namespace Medoz.KoeKan;
+namespace Medoz.CatChast;
 
 /// <summary>
 /// HotKeyクラスの初期化時に指定する修飾キー
@@ -81,11 +81,11 @@ public static class ModKeyExtension
 
     public static string ToString(this MOD_KEY modKey)
         =>  modKey switch{
-            MOD_KEY.ALT         => "ALT", 
-            MOD_KEY.CONTROL     => "CONTROL", 
-            MOD_KEY.SHIFT       => "SHIFT", 
-            MOD_KEY.WIN         => "WIN", 
-            MOD_KEY.NONE        => "", 
+            MOD_KEY.ALT         => "ALT",
+            MOD_KEY.CONTROL     => "CONTROL",
+            MOD_KEY.SHIFT       => "SHIFT",
+            MOD_KEY.WIN         => "WIN",
+            MOD_KEY.NONE        => "",
             _                   => ""
         };
 }

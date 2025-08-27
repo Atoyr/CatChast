@@ -1,13 +1,13 @@
 using System.Windows.Data;
 
 using Medoz.CatChast.Messaging;
-using Medoz.KoeKan.Clients;
-using Medoz.KoeKan.Command;
-using Medoz.KoeKan.Services;
+using Medoz.CatChast.Clients;
+using Medoz.CatChast.Command;
+using Medoz.CatChast.Services;
 
 using Microsoft.Extensions.Logging;
 
-namespace Medoz.KoeKan;
+namespace Medoz.CatChast;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml

@@ -3,11 +3,11 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Runtime.InteropServices;
 
-using Medoz.KoeKan.Clients;
-using Medoz.KoeKan.Data;
+using Medoz.CatChast.Clients;
+using Medoz.CatChast.Data;
 using Discord.Rest;
 
-namespace Medoz.KoeKan.Services;
+namespace Medoz.CatChast.Services;
 
 public class WindowService : IWindowService
 {

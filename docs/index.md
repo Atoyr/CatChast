@@ -1,12 +1,12 @@
-# KoeKan
+# CatChast
 ## はじめに
-KoeKanは、ゲーム中にシームレスにDiscordのメッセージをやり取りしたいという思いを元に作られたメッセージ転送アプリです。
+CatChastは、ゲーム中にシームレスにDiscordのメッセージをやり取りしたいという思いを元に作られたメッセージ転送アプリです。
 ゲーム中にコミュニケーションを取ることを目的としており、大きく2つの機能を提供します。
 
 - Discordなどのコミュニケーションツールのメッセージを送受信する
 - テキストを音声変換する
 
-KoeKanは外部ツールに依存しています。そのため、利用者にて外部ツールのセットアップが必要となります。
+CatChastは外部ツールに依存しています。そのため、利用者にて外部ツールのセットアップが必要となります。
 簡易的なセットアップ方法は本ドキュメントに記載していますが、細かいセットアップ方法については各種ツールのドキュメントをご確認ください。
 また、外部ツールの利用については各ツールの規約を守って使用してください。
 
@@ -34,13 +34,13 @@ VOICEVOXとの連携はVOICEVOXのWEP APIを利用しています。 VOICEVOXを
 ホットキーを入力することでテキストボックスにカーソルが移り、テキストが入力できるようになります。
 
 ## インストール
-KoeKanはexeのみ配布の形式です。
+CatChastはexeのみ配布の形式です。
 以下のURLからexeを取得して起動してください。
 
-[KoeKan](https://github.com/Atoyr/KoeKan/releases/download/v1.0/Medoz.KoeKan.zip)
+[CatChast](https://github.com/Atoyr/CatChast/releases/download/v1.0/Medoz.CatChast.zip)
 
 ## 基本操作
-KoeKanはゲーム中に操作することを想定しています。
+CatChastはゲーム中に操作することを想定しています。
 そのため、通常のウィンドウとは動作が異なります。
 操作するときはホットキーやコマンドを使用します。
 
@@ -64,9 +64,9 @@ KoeKanはゲーム中に操作することを想定しています。
 ex: `:window size 380 400`
 
 ## セットアップ
-KoeKanはUIを簡素にしているため、設定用のUIがありません。
+CatChastはUIを簡素にしているため、設定用のUIがありません。
 代わりにテキストボックスにコマンドを入力することが可能です。
-KoeKanとの連携箇所については、 コマンドを入力してセットアップします。
+CatChastとの連携箇所については、 コマンドを入力してセットアップします。
 
 ### Discord
 DiscordはAPIを提供していない代わりにBotを使用することでサーバのメッセージを読み書きできます。
@@ -103,10 +103,10 @@ DiscordはAPIを提供していない代わりにBotを使用することでサ�
 1. メモしたURLをDiscord サーバの管理者に連絡し、Botをサーバに追加するよう依頼してください。
 ![Botの追加](images/discord_7.png)
 
-1. KoeKanにDiscordのトークンを設定します。
-KoeKanを起動し、`:w discord.token {Botのトークン}`と入力します。`{Botのトークン}`部分には先ほどメモしたトークンを入力してください。
+1. CatChastにDiscordのトークンを設定します。
+CatChastを起動し、`:w discord.token {Botのトークン}`と入力します。`{Botのトークン}`部分には先ほどメモしたトークンを入力してください。
 
-1. KoeKanで`:discord start`と入力します。
+1. CatChastで`:discord start`と入力します。
 `Discord is Ready`と表示されたらセットアップは完了です。
 
 ### Twitch
@@ -122,7 +122,7 @@ VOICEVOXとの連携は、VOICEVOXに内蔵されているWEB APIを経由して
 
 1. [VOICEVOX](https://voicevox.hiroshiba.jp/)をダウンロードして起動します。
 
-1. KoeKanを起動し、`:voicevox start`と入力します。
+1. CatChastを起動し、`:voicevox start`と入力します。
 `VOICEVOX is Ready`と表示されたらセットアップは完了です。
 
 

@@ -8,12 +8,12 @@ using System.Windows.Input;
 
 using Microsoft.Extensions.Logging;
 
-using Medoz.KoeKan.Clients;
-using Medoz.KoeKan.Data;
-using Medoz.KoeKan.Services;
+using Medoz.CatChast.Clients;
+using Medoz.CatChast.Data;
+using Medoz.CatChast.Services;
 using Medoz.Logging;
 
-namespace Medoz.KoeKan;
+namespace Medoz.CatChast;
 
 /// <summary>
 /// Interaction logic for SettingsWindow.xaml

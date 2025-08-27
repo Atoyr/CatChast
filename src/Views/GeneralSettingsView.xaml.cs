@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Medoz.KoeKan;
+namespace Medoz.CatChast;
 
 public partial class GeneralSettingsView : System.Windows.Controls.UserControl
 {

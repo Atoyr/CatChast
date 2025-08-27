@@ -1,4 +1,4 @@
-namespace Medoz.KoeKan.Speakers;
+namespace Medoz.CatChast.Speakers;
 
 public static class SpeakerFactory
 {

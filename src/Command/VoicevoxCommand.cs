@@ -1,4 +1,4 @@
-namespace Medoz.KoeKan.Command;
+namespace Medoz.CatChast.Command;
 
 public class VoicevoxCommand : ICommand
 {

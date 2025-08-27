@@ -1,6 +1,6 @@
-using Medoz.KoeKan.Clients;
+using Medoz.CatChast.Clients;
 
-namespace Medoz.KoeKan.Services;
+namespace Medoz.CatChast.Services;
 
 public interface IClientService
 {

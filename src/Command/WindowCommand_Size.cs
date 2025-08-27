@@ -1,8 +1,8 @@
-using Medoz.KoeKan.Services;
+using Medoz.CatChast.Services;
 
 using Microsoft.Extensions.Logging;
 
-namespace Medoz.KoeKan.Command;
+namespace Medoz.CatChast.Command;
 
 public class WindowCommand_Size : ICommand
 {

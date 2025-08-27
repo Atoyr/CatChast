@@ -1,10 +1,10 @@
 using System.Text;
 
-using Medoz.KoeKan.Services;
-using Medoz.KoeKan.Clients;
+using Medoz.CatChast.Services;
+using Medoz.CatChast.Clients;
 using Microsoft.Extensions.Logging;
 
-namespace Medoz.KoeKan.Command;
+namespace Medoz.CatChast.Command;
 
 public class DiscordCommand_Guilds : ICommand
 {

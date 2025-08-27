@@ -1,6 +1,6 @@
-using Medoz.KoeKan.Clients;
+using Medoz.CatChast.Clients;
 
-namespace Medoz.KoeKan.Data;
+namespace Medoz.CatChast.Data;
 
 /// <summary>
 /// </summary>

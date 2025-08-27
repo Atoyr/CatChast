@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Input;
 
-namespace Medoz.KoeKan;
+namespace Medoz.CatChast;
 
 public class RelayCommand : ICommand
 {

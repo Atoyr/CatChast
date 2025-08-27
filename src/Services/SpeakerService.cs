@@ -1,15 +1,15 @@
-using Medoz.KoeKan.Clients;
-using Medoz.KoeKan.Speakers;
+using Medoz.CatChast.Clients;
+using Medoz.CatChast.Speakers;
 using Medoz.CatChast.Messaging;
 
 using Microsoft.Extensions.Logging;
 
-namespace Medoz.KoeKan.Services;
+namespace Medoz.CatChast.Services;
 
 /// <summary>
 /// スピーカーの管理を行うクラス
 /// </summary>
-public class SpeakerService : ISpeakerService
+public class SpeakerService : ISpeakerService, IDisposable
 {
     private readonly Dictionary<string, ISpeaker> _clients = new();
     private readonly Dictionary<string, IDisposable> _subscriptions = new();
@@ -132,7 +132,7 @@ public class SpeakerService : ISpeakerService
         }
         _clients.Add(name, client);
 
-        var subscription = _asyncEventBus.Subscribe<ClientMessage>( e =>
+        var subscription = _asyncEventBus.Subscribe<ClientMessage>(e =>
         {
             if (e.Key == name)
             {
@@ -159,6 +159,21 @@ public class SpeakerService : ISpeakerService
         else
         {
             throw new ArgumentException($"Client {name} is not registered.");
+        }
+    }
+
+    public void Dispose()
+    {
+        foreach (var subscription in _subscriptions.Values)
+        {
+            subscription.Dispose();
+        }
+        foreach (var client in _clients.Values)
+        {
+            if (client is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
         }
     }
 }

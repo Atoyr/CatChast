@@ -6,7 +6,7 @@ using System.Windows.Interop;
 
 using Medoz.CatChast.Auth;
 
-namespace Medoz.KoeKan;
+namespace Medoz.CatChast;
 
 public class TrayManager : IDisposable
 {
@@ -48,7 +48,7 @@ public class TrayManager : IDisposable
 
         // イベントハンドラー設定
         notifyIcon.DoubleClick += OnNotifyIconDoubleClick;
-        notifyIcon.MouseClick += OnNotifyIconMouseClick;
+        // notifyIcon.MouseClick += OnNotifyIconMouseClick;
 
         CreateContextMenu();
     }
@@ -103,13 +103,13 @@ public class TrayManager : IDisposable
         ShowMainWindowRequested?.Invoke(this, EventArgs.Empty);
     }
 
-    private void OnNotifyIconMouseClick(object? sender, MouseEventArgs e)
-    {
-        if (e.Button == MouseButtons.Left)
-        {
-            ShowMainWindowRequested?.Invoke(this, EventArgs.Empty);
-        }
-    }
+    //private void OnNotifyIconMouseClick(object? sender, MouseEventArgs e)
+    //{
+    //    if (e.Button == MouseButtons.Left)
+    //    {
+    //        ShowMainWindowRequested?.Invoke(this, EventArgs.Empty);
+    //    }
+    //}
 
     public void ShowBalloonTip(string title, string text, ToolTipIcon icon = ToolTipIcon.Info)
     {

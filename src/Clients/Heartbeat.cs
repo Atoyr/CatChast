@@ -1,6 +1,6 @@
 using System;
 using System.Threading;
-namespace Medoz.KoeKan.Clients;
+namespace Medoz.CatChast.Clients;
 
 public class Heartbeat : IDisposable
 {

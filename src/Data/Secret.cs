@@ -4,7 +4,7 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using System.Text.Json.Serialization;
 
-namespace Medoz.KoeKan.Data;
+namespace Medoz.CatChast.Data;
 
 /// <summary>
 /// シークレット情報を保持するクラス

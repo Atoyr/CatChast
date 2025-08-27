@@ -10,16 +10,16 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using Newtonsoft.Json.Bson;
 
-using Medoz.KoeKan.Data;
-using Medoz.KoeKan.Services;
-using Medoz.KoeKan.Clients;
+using Medoz.CatChast.Data;
+using Medoz.CatChast.Services;
+using Medoz.CatChast.Clients;
 using System.Net.WebSockets;
 using System.Drawing.Imaging;
 using Microsoft.Extensions.Logging;
 
 using Medoz.CatChast.Messaging;
 
-namespace Medoz.KoeKan;
+namespace Medoz.CatChast;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml

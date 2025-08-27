@@ -4,7 +4,7 @@ using System.Windows.Interop;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
-namespace Medoz.KoeKan;
+namespace Medoz.CatChast;
 
 public static class WindowExtention
 {

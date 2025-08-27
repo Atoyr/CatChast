@@ -1,9 +1,9 @@
 using System.Reactive.Disposables;
 
-using Medoz.KoeKan.Clients;
-using Medoz.KoeKan.Data;
+using Medoz.CatChast.Clients;
+using Medoz.CatChast.Data;
 
-namespace Medoz.KoeKan.Services;
+namespace Medoz.CatChast.Services;
 
 public interface IServerService
 {
