@@ -1,9 +1,9 @@
-using Medoz.KoeKan.Clients;
-using Medoz.KoeKan.Data;
-using Medoz.KoeKan.Services;
+using Medoz.CatChast.Clients;
+using Medoz.CatChast.Data;
+using Medoz.CatChast.Services;
 using Microsoft.Extensions.Logging;
 
-namespace Medoz.KoeKan.Command;
+namespace Medoz.CatChast.Command;
 
 public class DiscordCommand_Set : ICommand
 {

@@ -3,13 +3,13 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Runtime.InteropServices;
 
-using Medoz.KoeKan.Clients;
-using Medoz.KoeKan.Data;
-using Medoz.KoeKan.Server;
+using Medoz.CatChast.Clients;
+using Medoz.CatChast.Data;
+using Medoz.CatChast.Server;
 
 using Discord.Rest;
 
-namespace Medoz.KoeKan.Services;
+namespace Medoz.CatChast.Services;
 
 internal class ServerService : IServerService, IDisposable
 {

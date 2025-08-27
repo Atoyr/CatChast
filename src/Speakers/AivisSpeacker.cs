@@ -2,9 +2,9 @@ using System.IO;
 using System.Net.Http;
 using System.Media;
 using System.Threading.Channels;
-using Medoz.KoeKan.Clients;
+using Medoz.CatChast.Clients;
 
-namespace Medoz.KoeKan.Speakers;
+namespace Medoz.CatChast.Speakers;
 
 public class AivisSpeaker: ISpeaker
 {

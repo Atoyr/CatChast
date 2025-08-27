@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Medoz.KoeKan.Server;
+namespace Medoz.CatChast.Server;
 
 internal record Request(string Name, string Message, int Value);
 

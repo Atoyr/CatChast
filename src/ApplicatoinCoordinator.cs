@@ -1,9 +1,9 @@
 using System;
 using System.Windows;
 
-using Medoz.KoeKan.Services;
+using Medoz.CatChast.Services;
 
-namespace Medoz.KoeKan;
+namespace Medoz.CatChast;
 
 public class ApplicationCoordinator : IDisposable
 {

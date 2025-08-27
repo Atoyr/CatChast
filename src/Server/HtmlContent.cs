@@ -1,5 +1,5 @@
 // HtmlContent.cs
-namespace Medoz.KoeKan.Server;
+namespace Medoz.CatChast.Server;
 internal static class HtmlContent
 {
     /// <summary>

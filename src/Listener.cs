@@ -3,11 +3,11 @@ using System.Windows.Threading;
 
 using Microsoft.Extensions.Logging;
 
-using Medoz.KoeKan.Clients;
-using Medoz.KoeKan.Data;
+using Medoz.CatChast.Clients;
+using Medoz.CatChast.Data;
 using System.Windows.Data;
 
-namespace Medoz.KoeKan;
+namespace Medoz.CatChast;
 
 public class Listener : IDisposable
 {

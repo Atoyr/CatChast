@@ -1,4 +1,4 @@
-namespace Medoz.KoeKan.Data;
+namespace Medoz.CatChast.Data;
 
 /// <summary>
 /// </summary>

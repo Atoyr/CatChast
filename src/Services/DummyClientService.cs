@@ -8,14 +8,12 @@ namespace Medoz.CatChast.Services;
 /// <summary>
 /// クライアントの管理を行うクラス
 /// </summary>
-public class ClientService : IClientService
+public class DummyClientService : IClientService
 {
     private readonly Dictionary<string, ITextClient> _clients = new();
 
     private readonly string _defaultClient = "_";
 
-    private readonly IConfigService _configService;
-    private readonly IAsyncEventBus _asyncEventBus;
     private readonly ILogger _logger;
 
     /// <summary>
@@ -23,37 +21,10 @@ public class ClientService : IClientService
     /// </summary>
     /// <param name="asyncEventBus"></param>
     /// <param name="configService"></param>
-    public ClientService(
-        IAsyncEventBus asyncEventBus,
-        IConfigService configService,
-        ILogger<ClientService> logger)
+    public DummyClientService(
+        ILogger<DummyClientService> logger)
     {
-        _configService = configService;
-        _asyncEventBus = asyncEventBus;
         _logger = logger;
-        AddDefaultClient();
-    }
-
-    /// <summary>
-    /// デフォルトクライアントを追加します。
-    /// </summary>
-    private void AddDefaultClient()
-    {
-        var client = ClientFactory.Create<EchoClient>(new EchoOptions());
-        _clients.Add(_defaultClient, client);
-
-        client.OnReceiveMessage += async (message) =>
-        {
-            try
-            {
-                await _asyncEventBus.PublishAsync(message);
-            }
-            catch
-            {
-                // FIXME
-            }
-        };
-        client.RunAsync().Wait();
     }
 
     /// <summary>
@@ -61,20 +32,7 @@ public class ClientService : IClientService
     /// </summary>
     public ITextClient GetClient(string? name)
     {
-        if (_clients.TryGetValue(name ?? _defaultClient, out var client))
-        {
-            return client;
-        }
         throw new ArgumentException($"Client {name} is not registered.");
-    }
-
-    private ITextClient GetClientOrDefault(string? name)
-    {
-        if (string.IsNullOrEmpty(name))
-        {
-            return _clients[_defaultClient];
-        }
-        return _clients.TryGetValue(name, out var client) ? client : _clients[_defaultClient];
     }
 
     public bool TryGetClient(string? name, out ITextClient? client)
@@ -120,10 +78,6 @@ public class ClientService : IClientService
 
         if (onReceiveMessage is null)
         {
-            client.OnReceiveMessage += async (message) =>
-            {
-                await _asyncEventBus.PublishAsync(message);
-            };
         }
         else
         {
@@ -149,10 +103,6 @@ public class ClientService : IClientService
             throw new ArgumentException($"Client {name} is already registered.");
         }
         _clients.Add(name, client);
-        client.OnReceiveMessage += async message =>
-        {
-            await _asyncEventBus.PublishAsync(message);
-        };
     }
 
     /// <summary>

@@ -1,12 +1,12 @@
 using System.Net.WebSockets;
 using System.Text;
 
-using Medoz.KoeKan.Data;
+using Medoz.CatChast.Data;
 using Medoz.CatChast.Auth;
 
 using Microsoft.Extensions.Options;
 
-namespace Medoz.KoeKan.Clients;
+namespace Medoz.CatChast.Clients;
 
 public class TwitchTextClient: ITextClient
 {

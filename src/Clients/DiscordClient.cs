@@ -4,7 +4,7 @@ using Discord;
 using Discord.Audio;
 using Discord.WebSocket;
 
-namespace Medoz.KoeKan.Clients;
+namespace Medoz.CatChast.Clients;
 
 public class DiscordClient: ITextClient
 {

@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Controls = System.Windows.Controls;
 
-namespace Medoz.KoeKan;
+namespace Medoz.CatChast;
 
 public partial class SettingsWindow : Window
 {
@@ -18,7 +18,7 @@ public partial class SettingsWindow : Window
         InitializeViewComponents();
 
         settingsWindowViewModel.RequestClose += (s, e) => this.Close();
-        
+
         ShowPanel("General"); // 初期表示パネルを設定
     }
 

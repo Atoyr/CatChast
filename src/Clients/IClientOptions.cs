@@ -1,6 +1,6 @@
 using System.CodeDom;
 
-namespace Medoz.KoeKan.Clients;
+namespace Medoz.CatChast.Clients;
 
 public interface IClientOptions
 {

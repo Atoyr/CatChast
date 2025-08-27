@@ -3,9 +3,9 @@ using System.Windows.Threading;
 
 using Microsoft.Extensions.Logging;
 
-using Medoz.KoeKan.Data;
+using Medoz.CatChast.Data;
 
-namespace Medoz.KoeKan.Clients;
+namespace Medoz.CatChast.Clients;
 
 public class EchoClient: ITextClient
 {

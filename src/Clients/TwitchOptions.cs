@@ -1,4 +1,4 @@
-namespace Medoz.KoeKan.Clients;
+namespace Medoz.CatChast.Clients;
 
 public class TwitchOptions : IClientOptions
 {
@@ -7,7 +7,7 @@ public class TwitchOptions : IClientOptions
     // Client TypeがPublicなので、ClientSecretは不要
     public readonly string ClientId = "rgl0q1gsjromlw3ro7z8n4p2g9w34u";
 
-    public readonly string Username = "KoeKan";
+    public readonly string Username = "CatChast";
 
     public IEnumerable<string> Channels
     {

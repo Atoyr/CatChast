@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Medoz.KoeKan.Server;
+namespace Medoz.CatChast.Server;
 internal class WebServer
 {
     private HttpListener? listener;

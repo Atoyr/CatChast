@@ -3,9 +3,9 @@ using System.Text.Json;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 
-using Medoz.KoeKan.Data;
+using Medoz.CatChast.Data;
 
-namespace Medoz.KoeKan.Services;
+namespace Medoz.CatChast.Services;
 
 /// <summary>
 /// 設定情報を管理するクラス

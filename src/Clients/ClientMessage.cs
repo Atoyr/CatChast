@@ -1,4 +1,4 @@
-namespace Medoz.KoeKan.Clients;
+namespace Medoz.CatChast.Clients;
 
 public record ClientMessage(
     string Key,

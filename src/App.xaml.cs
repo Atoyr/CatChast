@@ -7,10 +7,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 using Medoz.CatChast.Messaging;
-using Medoz.KoeKan.Services;
-using Medoz.KoeKan.Data;
+using Medoz.CatChast.Services;
+using Medoz.CatChast.Data;
 
-namespace Medoz.KoeKan;
+namespace Medoz.CatChast;
 
 /// <summary>
 /// Interaction logic for App.xaml
@@ -34,7 +34,10 @@ public partial class App : System.Windows.Application
                     config.EnableConsoleOutput = true;
                     // config.OutputPath = "logs"; // ログファイルの出力先を指定する場合はここで設定
                 });
-                // 他のロガー設定があればここに追加
+                // 他のロガー設定があればここに追
+                logging.AddConsole();
+                logging.SetMinimumLevel(LogLevel.Debug);
+                logging.AddFilter("Microsoft.Extensions.DependencyInjection", LogLevel.Debug);
             })
             .Build();
 
@@ -50,15 +53,17 @@ public partial class App : System.Windows.Application
                 services.AddTransient<SettingsWindow>();
 
                 // メッセージングの登録
-                services.AddSingleton<IAsyncEventBus, QueuedAsyncEventBus>();
+                //services.AddSingleton<IAsyncEventBus, QueuedAsyncEventBus>();
+                services.AddSingleton<IAsyncEventBus, AsyncEventBus>();
 
                 // サービスの登録
                 // NOTE: サービスはアプリケーション内で使い回すことが想定されるため、Singletonとして登録
                 services.AddSingleton<IClientService, ClientService>();
+                // services.AddSingleton<IClientService, DummyClientService>();
                 services.AddSingleton<ISpeakerService, SpeakerService>();
                 services.AddSingleton<IConfigService, ConfigService>();
                 services.AddSingleton<IWindowService, WindowService>();
-                services.AddSingleton<IServerService, ServerService>();
+                //services.AddSingleton<IServerService, ServerService>();
 
                 // ViewModelの登録
                 services.AddTransient<MainWindowViewModel>();

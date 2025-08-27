@@ -2,9 +2,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-using Medoz.KoeKan.Data;
+using Medoz.CatChast.Data;
 
-namespace Medoz.KoeKan.Components;
+namespace Medoz.CatChast.Components;
 
 public partial class ChatMessageControl : System.Windows.Controls.UserControl
 {
