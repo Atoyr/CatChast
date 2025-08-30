@@ -39,15 +39,15 @@ public class TwitchCommand_Start : ICommand
     {
         // FIXME: TwitchClientの生成プロセスが複雑なので修正する
         var config = _configService.GetConfig();
-        var twitchClientConfig = config.Clients.TryGetValue("twitch", out var clientConfig)
-            ? clientConfig
-            : new DynamicConfig();
+        var twitchClientConfig = config.Clients.TryGetValue<TwitchConfig>("twitch", out var clientConfig) ? clientConfig : null;
 
-        var clientId = twitchClientConfig.TryGetValue<string>("clientId", out var id)
-            ? id
-            : null;
+        if (twitchClientConfig == null)
+        {
+            _logger.LogError("Twitch client configuration not found.");
+            return;
+        }
 
-        var oauth = new TwitchOAuthWithImplicit(new TwitchOAuthOptions(clientId ?? "", 53919));
+        var oauth = new TwitchOAuthWithImplicit(new TwitchOAuthOptions(twitchClientConfig.ClientId ?? "", 53919));
         var token = await oauth.AuthorizeAsync();
         if (string.IsNullOrEmpty(token.AccessToken))
         {
@@ -55,12 +55,8 @@ public class TwitchCommand_Start : ICommand
             return;
         }
 
-        var channels = twitchClientConfig.TryGetValue<string[]>("channels", out var channelList)
-            ? channelList
-            : Array.Empty<string>();
-
         var twitchClient = _clientService.GetOrCreateClient<TwitchTextClient>(
-            new TwitchOptions() { Token = token.AccessToken, Channels = channels ?? Array.Empty<string>() },
+            twitchClientConfig.ToTwitchOptions(token.AccessToken),
             "twitch",
             async message =>
             {
