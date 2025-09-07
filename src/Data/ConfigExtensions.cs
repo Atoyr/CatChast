@@ -4,7 +4,7 @@ namespace Medoz.CatChast.Data;
 
 public static class ConfigExtensions
 {
-    public static bool TryGetValue<T>(this IDictionary<string, DynamicConfig> config, string key, out T? value) where T : class
+    public static bool TryGetValue<T>(this IDictionary<string, DynamicConfig> config, string key, out T? value) where T : IConfig
     {
         if (config.TryGetValue(key, out var dynamicConfig))
         {

@@ -26,7 +26,7 @@ public class Config
     } = new Dictionary<string, DynamicConfig>();
 
     /// <summary>
-    /// クライアントの設定
+    /// スピーカーの設定
     /// </summary>
     public IDictionary<string, DynamicConfig> Speakers
     {

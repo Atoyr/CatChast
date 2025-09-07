@@ -50,21 +50,10 @@ public class VoicevoxCommand_Start : ICommand
             _logger.LogError($"Voicevox client {clientName ?? ""} config not found.");
             return;
         }
-
-        if (clientConfig.TryGetValue("speaker_id", out uint speakerId) == false)
-        {
-            _logger.LogError($"Voicevox client {clientName ?? ""} speaker_id not found.");
-            return;
-        }
-        clientConfig.TryGetValue("url", out string? url);
+        var voicevoxSpeackerOptions = new VoicevoxConfig(clientConfig).ToVoicevoxSpeakerOptions();
 
         _speakerService.GetOrCreateSpeaker<VoicevoxSpeaker>(
-            new VoicevoxSpeakerOptions()
-            {
-                SpeakerId = speakerId,
-                Url = url,
-                BindingKeys = ["_", "default"],
-            },
+            voicevoxSpeackerOptions,
             clientName ?? "_");
 
         await Task.CompletedTask;

@@ -4,7 +4,7 @@ namespace Medoz.CatChast.Data;
 
 /// <summary>
 /// </summary>
-public class TwitchConfig
+public class TwitchConfig : IConfig
 {
     private readonly DynamicConfig _config;
     // (IEnumerable<string> Channels, bool UseSpeaker, uint? Speaker)
