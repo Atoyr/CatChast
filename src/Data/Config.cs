@@ -1,9 +1,11 @@
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Medoz.CatChast.Data;
 
 /// <summary>
+/// アプリケーションの設定
 /// </summary>
 public class Config
 {
@@ -13,46 +15,59 @@ public class Config
 
     private readonly object _lock = new();
 
+    private Dictionary<string, DynamicConfig> _clients = new Dictionary<string, DynamicConfig>();
     /// <summary>
     /// クライアントの設定
     /// </summary>
+    [JsonIgnore]
     public IDictionary<string, DynamicConfig> Clients
     {
-        get;
+        get => _clients;
+    }
+    [JsonPropertyName("clients")]
+    [JsonInclude]
+    private Dictionary<string, DynamicConfig> _clientsRow
+    {
+        get => _clients;
+        set => _clients = value;
+    }
 
-        // FIXME: Json形式で保存するために、setをpublicにしているが、
-        // できればprivateにしたい。
-        set;
-    } = new Dictionary<string, DynamicConfig>();
 
+    private Dictionary<string, DynamicConfig> _speakers = new Dictionary<string, DynamicConfig>();
     /// <summary>
     /// スピーカーの設定
     /// </summary>
+    [JsonInclude]
     public IDictionary<string, DynamicConfig> Speakers
     {
-        get;
-
-        // FIXME: Json形式で保存するために、setをpublicにしているが、
-        // できればprivateにしたい。
-        set;
-    } = new Dictionary<string, DynamicConfig>();
+        get => _speakers;
+    }
+    [JsonPropertyName("speakers")]
+    [JsonInclude]
+    private Dictionary<string, DynamicConfig> _speakersRow
+    {
+        get => _speakers;
+        set => _speakers = value;
+    }
 
     private string _username = "";
     /// <summary>
     /// 自身の名前
     /// </summary>
+    [JsonPropertyName("username")]
+    [JsonInclude]
     public string Username
     {
         get
         {
-            lock(_lock)
+            lock (_lock)
             {
                 return _username;
             }
         }
         set
         {
-            lock(_lock)
+            lock (_lock)
             {
                 _username = value;
             }
@@ -63,18 +78,20 @@ public class Config
     /// <summary>
     /// 自身のアイコンファイルのパス
     /// </summary>
+    [JsonPropertyName("icon")]
+    [JsonInclude]
     public string? Icon
     {
         get
         {
-            lock(_lock)
+            lock (_lock)
             {
                 return _icon;
             }
         }
         set
         {
-            lock(_lock)
+            lock (_lock)
             {
                 _icon = value;
             }
@@ -85,18 +102,20 @@ public class Config
     /// <summary>
     /// ウィンドウの幅
     /// </summary>
+    [JsonPropertyName("width")]
+    [JsonInclude]
     public double Width
     {
         get
         {
-            lock(_lock)
+            lock (_lock)
             {
                 return _width;
             }
         }
         set
         {
-            lock(_lock)
+            lock (_lock)
             {
                 _width = value;
             }
@@ -107,18 +126,20 @@ public class Config
     /// <summary>
     /// ウィンドウの高さ
     /// </summary>
+    [JsonPropertyName("height")]
+    [JsonInclude]
     public double Height
     {
         get
         {
-            lock(_lock)
+            lock (_lock)
             {
                 return _height;
             }
         }
         set
         {
-            lock(_lock)
+            lock (_lock)
             {
                 _height = value;
             }
@@ -129,18 +150,20 @@ public class Config
     /// <summary>
     /// ウィンドウの左位置
     /// </summary>
+    [JsonPropertyName("x")]
+    [JsonInclude]
     public double X
     {
         get
         {
-            lock(_lock)
+            lock (_lock)
             {
                 return _x;
             }
         }
         set
         {
-            lock(_lock)
+            lock (_lock)
             {
                 _x = value;
             }
@@ -151,90 +174,113 @@ public class Config
     /// <summary>
     /// ウィンドウの上位置
     /// </summary>
+    [JsonPropertyName("y")]
+    [JsonInclude]
     public double Y
     {
         get
         {
-            lock(_lock)
+            lock (_lock)
             {
                 return _y;
             }
         }
         set
         {
-            lock(_lock)
+            lock (_lock)
             {
                 _y = value;
             }
         }
     }
 
-
-
-    private string _modKey = "CONTROL";
-    private string _key = "ENTER";
+    private MOD_KEY _modKey = MOD_KEY.CONTROL;
+    private KEY _key = KEY.ENTER;
 
     /// <summary>
     /// ホットキーの修飾キー
     /// </summary>
-    public string ModKey
+    [JsonIgnore]
+    public MOD_KEY ModKey
     {
         get
         {
-            lock(_lock)
+            lock (_lock)
             {
                 return _modKey;
             }
         }
         set
         {
-            lock(_lock)
+            lock (_lock)
             {
                 _modKey = value;
             }
         }
     }
 
+    [JsonPropertyName("modKey")]
+    [JsonInclude]
+    private string _modKeyRow
+    {
+        // Jsonのシリアライズ/デシリアライズで使用するためロックはしない
+        get => ModKeyExtension.ToString(_modKey);
+        set => _modKey = ModKeyExtension.GetModKey(value);
+    }
+
     /// <summary>
     /// ホットキーのキー
     /// </summary>
-    public string Key
+    [JsonIgnore]
+    public KEY Key
     {
         get
         {
-            lock(_lock)
+            lock (_lock)
             {
                 return _key;
             }
         }
         set
         {
-            lock(_lock)
+            lock (_lock)
             {
                 _key = value;
             }
         }
     }
 
+    [JsonPropertyName("key")]
+    [JsonInclude]
+    private string _keyRow
+    {
+        // Jsonのシリアライズ/デシリアライズで使用するためロックはしない
+        get => KeyExtension.ToString(_key);
+        set => _key = KeyExtension.GetKey(value);
+    }
+
     private IEnumerable<string> _applications = new List<string>();
     /// <summary>
     /// アクティブに変更できるアプリケーション一覧
     /// </summary>
+    [JsonIgnore]
     public IEnumerable<string> Applications
     {
         get
         {
-            lock(_lock)
+            lock (_lock)
             {
                 return _applications;
             }
         }
-        set
-        {
-            lock(_lock)
-            {
-                _applications = value;
-            }
-        }
+    }
+
+    [JsonPropertyName("applications")]
+    [JsonInclude]
+    private IEnumerable<string> _applicationsRow
+    {
+        // Jsonのシリアライズ/デシリアライズで使用するためロックはしない
+        get => _applications;
+        set => _applications = value;
     }
 }

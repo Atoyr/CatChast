@@ -31,7 +31,7 @@ public partial class MainWindowViewModel
     {
         get
         {
-            return ModKeyExtension.GetModKey(ConfigService.GetConfig().ModKey).ToUInt();
+            return ConfigService.GetConfig().ModKey.ToUInt();
         }
     }
 
@@ -42,7 +42,7 @@ public partial class MainWindowViewModel
     {
         get
         {
-            return KeyExtension.GetKey(ConfigService.GetConfig().Key).ToUInt();
+            return ConfigService.GetConfig().Key.ToUInt();
         }
     }
 

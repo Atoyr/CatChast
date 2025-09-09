@@ -138,27 +138,21 @@ public partial class SettingsWindowViewModel : INotifyPropertyChanged
 
     public MOD_KEY ModKey
     {
-        get => ModKeyExtension.GetModKey(_configService.GetConfig().ModKey);
+        get => _configService.GetConfig().ModKey;
         set
         {
-            if (_configService.GetConfig().ModKey != value.ToString())
-            {
-                _configService.GetConfig().ModKey = value.ToString();
-                OnPropertyChanged(nameof(ModKey));
-            }
+            _configService.GetConfig().ModKey = value;
+            OnPropertyChanged(nameof(ModKey));
         }
     }
 
     public KEY Key
     {
-        get => KeyExtension.GetKey(_configService.GetConfig().Key);
+        get => _configService.GetConfig().Key;
         set
         {
-            if (_configService.GetConfig().Key != value.ToString())
-            {
-                _configService.GetConfig().Key = value.ToString();
-                OnPropertyChanged(nameof(Key));
-            }
+            _configService.GetConfig().Key = value;
+            OnPropertyChanged(nameof(Key));
         }
     }
 
