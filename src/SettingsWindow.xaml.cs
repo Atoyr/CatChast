@@ -43,7 +43,7 @@ public partial class SettingsWindow : Window
     {
         if (MenuListBox.SelectedItem is ListBoxItem selectedItem)
         {
-            string tag = selectedItem.Tag?.ToString();
+            string tag = selectedItem.Tag?.ToString() ?? "";
             if (!string.IsNullOrEmpty(tag))
             {
                 ShowPanel(tag);
