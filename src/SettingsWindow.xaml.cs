@@ -18,8 +18,13 @@ public partial class SettingsWindow : Window
         InitializeViewComponents();
 
         settingsWindowViewModel.RequestClose += (s, e) => this.Close();
+        Loaded += SettingsWindow_Loaded;
+    }
 
-        ShowPanel("General"); // 初期表示パネルを設定
+
+    private void SettingsWindow_Loaded(object sender, RoutedEventArgs e)
+    {
+        MenuListBox.SelectedItem = MenuListBox.Items[0];
     }
 
     GeneralSettingsView? _generalSettingsView;
