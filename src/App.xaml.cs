@@ -65,6 +65,9 @@ public partial class App : System.Windows.Application
                 services.AddSingleton<IWindowService, WindowService>();
                 //services.AddSingleton<IServerService, ServerService>();
 
+                // アプリケーションコーディネーターを登録
+                services.AddSingleton<ApplicationCoordinator>();
+
                 // ViewModelの登録
                 services.AddTransient<MainWindowViewModel>();
                 services.AddTransient<SettingsWindowViewModel>();
@@ -95,8 +98,7 @@ public partial class App : System.Windows.Application
 
         // シャットダウンモードを明示的に設定
         this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
-        Coordinator = new ApplicationCoordinator(
-            _host.Services.GetRequiredService<IWindowService>());
+        Coordinator = _host.Services.GetRequiredService<ApplicationCoordinator>();
 
         base.OnStartup(e);
     }

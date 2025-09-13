@@ -37,7 +37,7 @@ public class Config
     /// <summary>
     /// スピーカーの設定
     /// </summary>
-    [JsonInclude]
+    [JsonIgnore]
     public IDictionary<string, DynamicConfig> Speakers
     {
         get => _speakers;
@@ -48,6 +48,30 @@ public class Config
     {
         get => _speakers;
         set => _speakers = value;
+    }
+
+    private DynamicConfig _WebApiConfig = new DynamicConfig();
+    /// <summary>
+    /// Web APIの設定
+    /// </summary>
+    [JsonIgnore]
+    public WebApiConfig WebApiConfig
+    {
+        get
+        {
+            lock (_lock)
+            {
+                return new WebApiConfig(_WebApiConfig);
+            }
+        }
+    }
+
+    [JsonPropertyName("webApi")]
+    [JsonInclude]
+    private DynamicConfig _WebApiConfigRow
+    {
+        get => _WebApiConfig;
+        set => _WebApiConfig = value;
     }
 
     private string _username = "";
