@@ -27,6 +27,8 @@ internal class WebApi : IDisposable
     private readonly CancellationTokenSource _cancellationTokenSource;
     private readonly Action<Request>? _dataReceivedAction;
 
+    public bool AllowExternalAccess { get; set; } = false;
+
     public WebApi(Action<Request> dataReceivedAction)
     {
         _dataReceivedAction = dataReceivedAction;
@@ -41,11 +43,10 @@ internal class WebApi : IDisposable
                 return;
 
             _listener = new HttpListener();
-            // FIXME: 外部からのアクセスを許可する場合は、http://*:{port}/ などに変更
-            _listener.Prefixes.Add($"http://localhost:{port}/");
+            _listener.Prefixes.Add(AllowExternalAccess ? $"http://*:{port}/" : $"http://localhost:{port}/");
             _listener.Start();
 
-            await Task.Run(() => ProcessRequestsAsync(_cancellationTokenSource.Token));
+            await ProcessRequestsAsync(_cancellationTokenSource.Token);
         }
         catch (System.Exception)
         {
