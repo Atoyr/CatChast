@@ -9,13 +9,13 @@ public class VoicevoxSpeakerOptions : ISpeakerOptions
     {
         get
         {
-            if(!_options.ContainsKey("speakerId"))
+            if(!_options.ContainsKey("speaker_id"))
             {
                 return 0;
             }
-            return uint.Parse(_options["speakerId"]);
+            return uint.Parse(_options["speaker_id"]);
         }
-        set => _options["speakerId"] = value.ToString();
+        set => _options["speaker_id"] = value.ToString();
     }
 
     public string? Url

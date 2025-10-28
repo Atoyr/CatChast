@@ -19,7 +19,7 @@ public class VoicevoxConfig : IConfig
         _config = new();
     }
 
-    public uint SpeakerId => _config.TryGetValue<uint>("SpeakerId", out var speakerId) ? speakerId : 0;
+    public uint SpeakerId => _config.TryGetValue<uint>("speaker_id", out var speakerId) ? speakerId : 0;
 
     string? Url => _config.TryGetValue<string>("Url", out var url) ? url : null;
 
