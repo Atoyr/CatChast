@@ -13,6 +13,7 @@ public class CommandFactory
     private readonly IConfigService _configService;
     private readonly IClientService _clientService;
     private readonly ISpeakerService _speakerService;
+    private readonly IServerService _serverService;
     private readonly IWindowService _windowService;
     private readonly IAsyncEventBus _asyncEventBus;
     private readonly ILogger? _logger;
@@ -28,6 +29,7 @@ public class CommandFactory
         IConfigService configService,
         IClientService clientService,
         ISpeakerService speakerService,
+        IServerService serverService,
         IWindowService windowService,
         IAsyncEventBus asyncEventBus,
         ILogger? logger)
@@ -35,6 +37,7 @@ public class CommandFactory
         _configService = configService;
         _clientService = clientService;
         _speakerService = speakerService;
+        _serverService = serverService;
         _windowService = windowService;
         _asyncEventBus = asyncEventBus;
         _logger = logger;
@@ -86,6 +89,10 @@ public class CommandFactory
             else if (parameterType == typeof(IClientService))
             {
                 arguments[i] = _clientService;
+            }
+            else if (parameterType == typeof(IServerService))
+            {
+                arguments[i] = _serverService;
             }
             else if (parameterType == typeof(ISpeakerService))
             {
@@ -199,6 +206,13 @@ public class CommandFactory
             CreateCommandWithSubCommands<VoicevoxCommand>(
                 typeof(VoicevoxCommand_Init),
                 typeof(VoicevoxCommand_Start)
+            )
+        );
+
+        // Webapiコマンド
+        commandManager.RegisterCommand(
+            CreateCommandWithSubCommands<WebApiCommand>(
+                typeof(WebApiCommand_Start)
             )
         );
 

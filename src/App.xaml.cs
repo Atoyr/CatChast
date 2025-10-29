@@ -58,12 +58,12 @@ public partial class App : System.Windows.Application
 
                 // サービスの登録
                 // NOTE: サービスはアプリケーション内で使い回すことが想定されるため、Singletonとして登録
+                services.AddSingleton<IServerService, ServerService>();
                 services.AddSingleton<IClientService, ClientService>();
                 // services.AddSingleton<IClientService, DummyClientService>();
                 services.AddSingleton<ISpeakerService, SpeakerService>();
                 services.AddSingleton<IConfigService, ConfigService>();
                 services.AddSingleton<IWindowService, WindowService>();
-                //services.AddSingleton<IServerService, ServerService>();
 
                 // アプリケーションコーディネーターを登録
                 services.AddSingleton<ApplicationCoordinator>();

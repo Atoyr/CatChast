@@ -1,6 +1,7 @@
 using Medoz.CatChast.Clients;
 using Medoz.CatChast.Speakers;
 using Medoz.CatChast.Messaging;
+using Medoz.CatChast.Server;
 
 using Microsoft.Extensions.Logging;
 
@@ -17,6 +18,7 @@ public class SpeakerService : ISpeakerService, IDisposable
     private readonly string _defaultClient = "_";
 
     private readonly IAsyncEventBus _asyncEventBus;
+    private readonly IServerService _serverService;
     private readonly ILogger _logger;
 
     /// <summary>
@@ -26,9 +28,11 @@ public class SpeakerService : ISpeakerService, IDisposable
     /// <param name="configService"></param>
     public SpeakerService(
         IAsyncEventBus asyncEventBus,
+        IServerService serverService,
         ILogger<SpeakerService> logger)
     {
         _asyncEventBus = asyncEventBus;
+        _serverService = serverService;
         _logger = logger;
     }
 
@@ -111,6 +115,16 @@ public class SpeakerService : ISpeakerService, IDisposable
             }
         });
         _subscriptions.Add(name, subscription);
+
+        // サーバーアクションの登録
+        var serverAction = new RequestAction($"/speak", request =>
+        {
+            if ((request.ClientName ?? "_") == name)
+            {
+                _ = speaker.SpeakMessageAsync(request.Message ?? string.Empty);
+            }
+        });
+        _serverService.RegisterRequestAction(serverAction);
 
         speaker.OnReady += async () =>
         {

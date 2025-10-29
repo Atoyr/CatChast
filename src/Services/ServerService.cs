@@ -16,16 +16,11 @@ internal class ServerService : IServerService, IDisposable
 
     private readonly WebApi _webApi;
 
-    public event EventHandler<string>? WebApiMessageReceived;
-
+    private readonly int basePort = 22222;
 
     public ServerService()
     {
-        _webApi = new WebApi((request) =>
-        {
-            // Handle incoming request here
-            WebApiMessageReceived?.Invoke(this, request.Message);
-        });
+        _webApi = new WebApi();
     }
 
     public ServerService(WebApi webApi)
@@ -33,13 +28,27 @@ internal class ServerService : IServerService, IDisposable
         _webApi = webApi;
     }
 
-    public async Task StartWebApiAsync()
+    public async Task StartWebApiAsync(uint? port = null)
     {
-        await _webApi.StartAsync(22222);
+        if (port.HasValue)
+        {
+            if (port.Value <= 0 || port.Value > 65535)
+            {
+                throw new ArgumentOutOfRangeException(nameof(port), "Port number must be between 1 and 65535.");
+            }
+            await _webApi.StartAsync((int)port.Value);
+            return;
+        }
+        await _webApi.StartAsync(basePort);
     }
     public void StopWebApi()
     {
         _webApi.Stop();
+    }
+
+    public void RegisterRequestAction(RequestAction action)
+    {
+        _webApi.RegisterDataReceivedAction(action);
     }
 
     public void Dispose()

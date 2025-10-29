@@ -1,15 +1,12 @@
-using System.Reactive.Disposables;
-
-using Medoz.CatChast.Clients;
-using Medoz.CatChast.Data;
+using Medoz.CatChast.Server;
 
 namespace Medoz.CatChast.Services;
 
 public interface IServerService
 {
-    Task StartWebApiAsync();
+    Task StartWebApiAsync(uint? port = null);
     void StopWebApi();
 
-    event EventHandler<string>? WebApiMessageReceived;
+    void RegisterRequestAction(RequestAction action);
 }
 

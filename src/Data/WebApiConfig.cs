@@ -19,7 +19,7 @@ public class WebApiConfig : IConfig
         _config = new();
     }
 
-    public uint Port => _config.TryGetValue<uint>("port", out var port) ? port : 8080;
+    public uint Port => _config.TryGetValue<uint>("port", out var port) ? port : 22222;
 
     public bool IsAutoStart => _config.TryGetValue<bool>("autoStart", out var autoStart) ? autoStart : false;
 }

@@ -86,7 +86,7 @@ public class ApplicationCoordinator : IDisposable
         if (config.WebApiConfig.IsAutoStart)
         {
             // FIXME: ServerServiceがあまり実装されていない
-            _serverService.StartWebApiAsync();
+            _serverService.StartWebApiAsync(config.WebApiConfig.Port);
         }
     }
 

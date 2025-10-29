@@ -13,9 +13,15 @@ using System.Windows;
 
 namespace Medoz.CatChast.Server;
 
-internal record Request(string Name, string Message, int Value);
+public record Request(
+    int? Id,
+    string? Type,
+    string? ClientName,
+    string? Message,
+    string? Value
+);
 
-internal record Response(
+public record Response(
     bool Success,
     string Message,
     DateTime Timestamp
@@ -25,14 +31,24 @@ internal class WebApi : IDisposable
 {
     private HttpListener? _listener;
     private readonly CancellationTokenSource _cancellationTokenSource;
-    private readonly Action<Request>? _dataReceivedAction;
+    private readonly List<RequestAction> _requestActions = new();
 
     public bool AllowExternalAccess { get; set; } = false;
 
-    public WebApi(Action<Request> dataReceivedAction)
+    public WebApi()
     {
-        _dataReceivedAction = dataReceivedAction;
         _cancellationTokenSource = new CancellationTokenSource();
+    }
+
+    public void RegisterDataReceivedAction(RequestAction action)
+    {
+        // 既存のアクションに追加
+        if (_requestActions.Any(a => a.Route == action.Route))
+        {
+            throw new InvalidOperationException($"Route '{action.Route}' is already registered.");
+        }
+
+        _requestActions.Add(action);
     }
 
     public async Task StartAsync(int port)
@@ -43,7 +59,8 @@ internal class WebApi : IDisposable
                 return;
 
             _listener = new HttpListener();
-            _listener.Prefixes.Add(AllowExternalAccess ? $"http://*:{port}/" : $"http://localhost:{port}/");
+            // FIXME: 外部からのアクセスを許可する場合は、http://*:{port}/ などに変更
+            _listener.Prefixes.Add($"http://localhost:{port}/");
             _listener.Start();
 
             await ProcessRequestsAsync(_cancellationTokenSource.Token);
@@ -106,15 +123,16 @@ internal class WebApi : IDisposable
                 return;
             }
 
-            if (request.HttpMethod == "POST" && request.Url?.AbsolutePath == "/api/data")
+            if (request.HttpMethod == "POST" && _requestActions.Any(a => a.Route == request.Url?.AbsolutePath))
             {
-                await HandlePostRequest(request, response);
+                var action = _requestActions.First(a => a.Route == request.Url?.AbsolutePath);
+                await HandlePostRequest(request, response, action);
             }
-            else if (request.HttpMethod == "GET" && request.Url?.AbsolutePath == "/")
-            {
-                // TODO
-                // HTMLコンテンツを返す
-            }
+            // else if (request.HttpMethod == "GET" && request.Url?.AbsolutePath == "/")
+            // {
+            //     // TODO
+            //     // Swagger
+            // }
             else
             {
                 // 404 Not Found
@@ -139,7 +157,7 @@ internal class WebApi : IDisposable
         }
     }
 
-    private async Task HandlePostRequest(HttpListenerRequest request, HttpListenerResponse response)
+    private async Task HandlePostRequest(HttpListenerRequest request, HttpListenerResponse response, RequestAction action)
     {
         try
         {
@@ -166,7 +184,7 @@ internal class WebApi : IDisposable
             }
 
             // WPFのUIスレッドで処理結果を表示
-            System.Windows.Application.Current.Dispatcher.Invoke(() => _dataReceivedAction?.Invoke(apiRequest));
+            System.Windows.Application.Current.Dispatcher.Invoke(() => action.Invoke(apiRequest));
 
             // 成功レスポンスを返す
             var successResponse = JsonSerializer.Serialize(new Response(
@@ -200,7 +218,7 @@ internal class WebApi : IDisposable
         _listener?.Close();
     }
 
-    private async Task WriteJsonResponse(HttpListenerResponse response, string json)
+    private static async Task WriteJsonResponse(HttpListenerResponse response, string json)
     {
         response.ContentType = "application/json; charset=UTF-8";
         var buffer = Encoding.UTF8.GetBytes(json);

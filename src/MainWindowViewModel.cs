@@ -17,6 +17,7 @@ public partial class MainWindowViewModel
     internal readonly IConfigService ConfigService;
     internal readonly IClientService ClientService;
     internal readonly ISpeakerService SpeakerService;
+    internal readonly IServerService ServerService;
     internal readonly IWindowService WindowService;
     internal readonly IAsyncEventBus AsyncEventBus;
     internal readonly ILogger Logger;
@@ -77,6 +78,7 @@ public partial class MainWindowViewModel
     public MainWindowViewModel(IConfigService configService,
                                IClientService clientService,
                                ISpeakerService speakerService,
+                               IServerService serverService,
                                IWindowService windowService,
                                IAsyncEventBus asyncEventBus,
                                ILogger<MainWindowViewModel> logger
@@ -85,6 +87,7 @@ public partial class MainWindowViewModel
         ConfigService = configService;
         ClientService = clientService;
         SpeakerService = speakerService;
+        ServerService = serverService;
         WindowService = windowService;
         AsyncEventBus = asyncEventBus;
         Logger = logger;
@@ -94,6 +97,7 @@ public partial class MainWindowViewModel
             ConfigService,
             ClientService,
             SpeakerService,
+            ServerService,
             WindowService,
             AsyncEventBus,
             Logger);

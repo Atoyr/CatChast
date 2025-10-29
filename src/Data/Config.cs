@@ -66,7 +66,7 @@ public class Config
         }
     }
 
-    [JsonPropertyName("webApi")]
+    [JsonPropertyName("web_api")]
     [JsonInclude]
     private DynamicConfig _WebApiConfigRow
     {
@@ -243,7 +243,7 @@ public class Config
         }
     }
 
-    [JsonPropertyName("modKey")]
+    [JsonPropertyName("mod_key")]
     [JsonInclude]
     private string _modKeyRow
     {
